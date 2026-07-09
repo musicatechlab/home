@@ -1,0 +1,243 @@
+---
+import Layout from '../layouts/Layout.astro';
+import AdSense from '../components/AdSense.astro';
+
+// Define the projects for the link cards
+const projects = [
+  {
+    title: 'MIDI-to-MP3',
+    description: 'High-quality MIDI to audio conversion tool in your browser.',
+    url: 'https://midi.musicatechlab.com', // Placeholder URL
+    icon: '🎵',
+    color: 'var(--accent-primary)'
+  },
+  {
+    title: 'Development Blog',
+    description: 'Tech insights, development logs, and tutorials.',
+    url: 'https://blog.musicatechlab.com', // Placeholder URL
+    icon: '📝',
+    color: 'var(--accent-secondary)'
+  },
+  {
+    title: 'Coming Soon',
+    description: 'More innovative music and tech tools are on the way.',
+    url: '#',
+    icon: '✨',
+    color: '#10b981' // Green
+  }
+];
+---
+
+<Layout title="MusicaTechLab - Home">
+  <main class="container">
+    <header class="hero">
+      <div class="logo-container">
+        <h1 class="logo-text">Musica<span>Tech</span>Lab</h1>
+      </div>
+      <p class="subtitle">Where Music Meets Technology</p>
+    </header>
+
+    <section class="projects-grid">
+      {projects.map(project => (
+        <a href={project.url} class="project-card" style={`--card-accent: ${project.color}`}>
+          <div class="card-icon">{project.icon}</div>
+          <div class="card-content">
+            <h2>{project.title}</h2>
+            <p>{project.description}</p>
+          </div>
+          <div class="card-arrow">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </div>
+        </a>
+      ))}
+    </section>
+
+    <AdSense />
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; {new Date().getFullYear()} MusicaTechLab. All rights reserved.</p>
+  </footer>
+</Layout>
+
+<style>
+  .container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .hero {
+    text-align: center;
+    margin-bottom: 4rem;
+    margin-top: 2rem;
+    animation: fadeInDown 0.8s ease-out forwards;
+  }
+
+  .logo-text {
+    font-size: 4rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(to right, var(--text-main), #cbd5e1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .logo-text span {
+    background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .subtitle {
+    font-size: 1.25rem;
+    color: var(--text-muted);
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .project-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text-main);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.6s ease-out forwards;
+    opacity: 0;
+  }
+
+  .project-card:nth-child(1) { animation-delay: 0.1s; }
+  .project-card:nth-child(2) { animation-delay: 0.2s; }
+  .project-card:nth-child(3) { animation-delay: 0.3s; }
+
+  .project-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: var(--card-accent);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .project-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--card-hover-border);
+    box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .project-card:hover::before {
+    opacity: 1;
+  }
+
+  .card-icon {
+    font-size: 2.5rem;
+    margin-right: 1.25rem;
+    background: rgba(255, 255, 255, 0.05);
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 12px;
+    flex-shrink: 0;
+    border: 1px solid rgba(255,255,255,0.03);
+  }
+
+  .card-content {
+    flex: 1;
+  }
+
+  .card-content h2 {
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+    font-weight: 700;
+  }
+
+  .card-content p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  .card-arrow {
+    color: var(--text-muted);
+    transition: all 0.3s ease;
+    opacity: 0.5;
+    transform: translateX(-10px);
+  }
+
+  .project-card:hover .card-arrow {
+    opacity: 1;
+    transform: translateX(0);
+    color: var(--card-accent);
+  }
+
+  .site-footer {
+    text-align: center;
+    padding: 2rem;
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    border-top: 1px solid var(--card-border);
+    background: rgba(0, 0, 0, 0.2);
+    margin-top: auto;
+  }
+
+  @keyframes fadeInDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .logo-text {
+      font-size: 2.5rem;
+    }
+    .project-card {
+      padding: 1.25rem;
+    }
+    .card-icon {
+      width: 50px;
+      height: 50px;
+      font-size: 2rem;
+    }
+  }
+</style>
