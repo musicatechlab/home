@@ -1,3 +1,9 @@
+# MusicaTechLab — home（ポータルサイト）
+
+> **共通ルール**: 作業前にリポジトリルートの [`../CLAUDE.md`](../CLAUDE.md) を必ず読むこと。
+> UI に触れる場合は [`../docs/DESIGN_SYSTEM.md`](../docs/DESIGN_SYSTEM.md) と [`../design/tokens.css`](../design/tokens.css) が唯一の正。
+> 現行の実装はダーク系の**旧テーマ**（新規流用禁止・移行予定）。
+
 ## Development
 
 When starting the dev server, use background mode:
